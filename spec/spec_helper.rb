@@ -5,7 +5,7 @@ Infrataster::Server.define(
   :mongodb,
   '172.26.126.0/32',
   #mongodb:{host: 'localhost', port: 27017},
-  mongodb:{host: 'localhost', port: 27017, db: 'test_db'}
+  mongodb:{host: 'localhost', port: 27017, db: 'test_db', collection: 'test_collection'}
 )
 
 RSpec.configure do |config|
