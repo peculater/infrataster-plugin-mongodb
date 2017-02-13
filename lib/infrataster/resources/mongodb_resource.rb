@@ -1,5 +1,5 @@
 require 'infrataster'
-require 'redis'
+require 'mongo'
 
 module Infrataster
   module Resources

@@ -1,55 +1,36 @@
 require 'spec_helper'
 
 describe server(:mongodb) do
-  describe mongodb("server_info") do
-    it 'should show server info' do
+  describe mongodb({ "isMaster": 1 }) do
+    it 'should be the master node' do
       # Show mongodb server information
-      result["version"].should == "2.6.8"
+      result.each do |doc|
+        doc["ismaster"].should == true 
+      end
     end
   end 
 
-  describe mongodb("ping") do
+  describe mongodb({ "ping": 1 }) do
     it 'should ping mongodb' do
       # Check the connection to mongodb
-      result.should == {"ok"=>1.0}
+      result.ok?
     end
   end 
   
-  describe mongodb("validate_collection 'test_collection'") do
-    it 'should validate collection' do
-      # Validate collection
-      result["valid"].should == true
-    end
-  end 
-  
-  describe mongodb("database_names") do
-    it 'should show database' do
-      # Show All databases
-      result.should include("test_db")
-    end
-  end
-
-  describe mongodb("collection_names") do
-    it 'should show collections' do
-      # Show All collections
-      result.should include("test_collection")
-    end
-  end
-
-  # TODO: Test 
-  describe mongodb("insert '{\"status\"=>\"Success\"}'") do
+  describe mongodb({ "insert": "infrataster_collection", "documents": [ {"status": "Success"}] }) do
     it 'should insert document to collection' do
       # Insert document to collection
-      print "res::::", result 
-      result.should include("test_collection")
+      #print "res::::", result 
+      result.ok?
     end
   end
 
-  describe mongodb("find '{\"status\"=>\"Success\"}'") do
+  describe mongodb({ "find": "infrataster_collection", "filter": {"status": "Success"}}) do
     it 'should find document from collection' do
       # Find document from collection
-      print "res ::::",  result 
-      result.each {|res| print res}
+      #print "res ::::",  result 
+      #result.each {|res| print res}
+      result.ok?
     end
   end
 
