@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name = "infrataster-plugin-mongodb"
-  spec.version = '0.1.1'
+  spec.version = '0.2.0'
   spec.authors = ["Rahul Khengare"]
   spec.email = ["rahulk1306@gmail.com"]
   spec.summary = %q{Mongodb plugin for Infrataster}
